@@ -18,46 +18,51 @@
 
 class Calculator {
   constructor() {
-    let result;
+    this.result = null;
   }
   add(num) {
     this.result += num;
+    return this.result;
   }
   subtract(num) {
     this.result -= num;
+    return this.result;
   }
   multiply(num) {
     this.result *= num;
+    return this.result;
   }
   divide(num) {
     if (num == 0) {
-      return Error;
+      throw new Error("Something went wrong");
     }
     this.result /= num;
+    return this.result;
   }
   clear() {
     this.result = 0;
+    return this.result;
   }
   getResult() {
     return this.result;
   }
   calculate(sent) {
-    let arr = [];
     sent = sent.replace(/\s/g, "");
     sent = sent.replace(/[.,\?#!$%\^&\;:=\_`~]/g, "");
-    console.log(sent);
+    sent = sent.replace(/[A-Z,a-z]/g, "$");
     for (let i = 0; i < sent.length; i++) {
-      arr.push(sent[i]);
-      console.log(arr[i]);
+      if (sent[i] == "$") {
+        return Error;
+      }
     }
-    // while (i < arr.length && j > 0) {
-    //   if (arr[i] == "(") {
-    //   }
-    // }
+    let ans = eval(sent);
+    this.result = ans;
+    return this.result;
   }
 }
 
 const obj = new Calculator();
-obj.calculate(`10 +   2 *    (   6 - (4 + 1) / 2) + 7`);
+let myAns = obj.calculate(`2+3*4`);
+console.log(myAns);
 
 module.exports = Calculator;
