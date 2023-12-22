@@ -6,3 +6,14 @@
 //  - HH:MM::SS (Eg. 13:45:23)
 
 //  - HH:MM::SS AM/PM (Eg 01:45:23 PM)
+
+function clock() {
+  const dateObj = new Date();
+  //   let hour = dateObj.getHours();
+  //   let minute = dateObj.getMinutes();
+  //   let seconds = dateObj.getSeconds();
+  let timeZone = dateObj.toLocaleTimeString();
+  console.log(timeZone);
+}
+
+setInterval(clock, 1000);
