@@ -34,7 +34,7 @@ class Calculator {
   }
   divide(num) {
     if (num == 0) {
-      throw new Error("Something went wrong");
+      throw new Error();
     }
     this.result /= num;
     return this.result;
@@ -48,11 +48,14 @@ class Calculator {
   }
   calculate(sent) {
     sent = sent.replace(/\s/g, "");
-    sent = sent.replace(/[.,\?#!$%\^&\;:=\_`~]/g, "");
+    sent = sent.replace(/[,\?#!$%\^&\;:=\_`~]/g, "");
     sent = sent.replace(/[A-Z,a-z]/g, "$");
     for (let i = 0; i < sent.length; i++) {
       if (sent[i] == "$") {
-        return Error;
+        throw new Error();
+      }
+      if (sent[i] == "/" && sent[i + 1] == "0") {
+        throw new Error();
       }
     }
     let ans = eval(sent);
